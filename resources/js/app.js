@@ -1,7 +1,8 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
+import { createApp } from 'vue/dist/vue.esm-bundler';
+import Post from './componets/post/index.vue';
 
-window.Alpine = Alpine;
-
-Alpine.start();
+const app = createApp({});
+app.component('post-index', Post);
+app.mount('#app');
