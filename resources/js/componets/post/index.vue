@@ -22,7 +22,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(post, index) in posts" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+            <tr v-for="(post, index) in posts.data" :key="post.id"
+                class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{ post.id }}
                 </th>
@@ -41,9 +42,14 @@
             </tr>
 
             </tbody>
-        </table>
-    </div>
 
+        </table>
+
+    </div>
+    <TailwindPagination
+        :data="posts"
+        @pagination-change-page="getPosts"
+    />
 </template>
 <script>
 import usePosts from "../../composable/posts";
@@ -55,7 +61,7 @@ export default {
     setup() {
         const {posts, getPosts} = usePosts();
         onMounted(getPosts);
-        return {posts};
+        return {posts, getPosts};
     }
 
 
